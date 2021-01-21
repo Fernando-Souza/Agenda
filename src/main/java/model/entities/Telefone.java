@@ -5,18 +5,17 @@ public abstract class Telefone {
 	private String operadora;
 	private String codArea;
 	private String numero;
-	private String tipo;
+	private TipoTel tipo;
 
-	public Telefone(String operadora, String tipo, String codArea) {
+	public Telefone(String operadora, String codArea) {
 
 		this.operadora = operadora;
-		this.tipo = tipo;
-
+		
 		validaCodArea(codArea);
 
 	}
 
-	public Telefone(String tipo, String codArea) {
+	public Telefone(String codArea) {
 
 		this.codArea = codArea;
 
@@ -49,11 +48,11 @@ public abstract class Telefone {
 
 	}
 
-	public String getTipo() {
+	public TipoTel getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
+	public void setTipo(TipoTel tipo) {
 		this.tipo = tipo;
 	}
 

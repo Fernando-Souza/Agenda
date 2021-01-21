@@ -2,17 +2,19 @@ package model.entities;
 
 public class Fixo extends Telefone {
 
-	public Fixo(String operadora, String tipo, String codArea, String numero) {
+	public Fixo(String operadora, String codArea, String numero) {
 
-		super(operadora, tipo, codArea);
+		super(operadora, codArea);
 		this.setNumber(numero);
+		super.setTipo(TipoTel.FIXO);
 
 	}
 
-	public Fixo(String tipo, String codArea, String numero) {
+	public Fixo(String codArea, String numero) {
 
-		super(tipo, codArea);
+		super(codArea);
 		this.setNumber(numero);
+		super.setTipo(TipoTel.FIXO);
 
 	}
 

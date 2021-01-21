@@ -2,8 +2,8 @@ package model.entities;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
 
 public class Compromisso {
 
@@ -11,43 +11,34 @@ public class Compromisso {
 	LocalDate  dataEvento;
 	LocalTime horario;
 	String endereco;
-	String referencia;
-	List<Contato> contato;
+	String referencia;	
 	String descricao;
+	
+	DateTimeFormatter formatDia = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	DateTimeFormatter formatHora = DateTimeFormatter.ofPattern("HH:mm:ss");
 
-	public Compromisso(String titulo, String data, String horario, String endereco, String referencia, Contato contato,
+	public Compromisso(String titulo, String data, String horario, String endereco, String referencia,
 			String descricao) {
 		
 		this.titulo=titulo;
-		this.dataEvento = LocalDate.parse(data);
-		this.horario=LocalTime.parse(horario);
+		this.dataEvento = LocalDate.parse(data,formatDia);
+		this.horario=LocalTime.parse(horario,formatHora);
 		this.endereco=endereco;
-		this.referencia=referencia;
-		this.contato.add(contato);
+		this.referencia=referencia;		
 		this.descricao=descricao;
 
 	}
 
-	public Compromisso(String titulo, String data, String horario, String endereco, Contato contato, String descricao) {
+	public Compromisso(String titulo, String data, String horario, String endereco,String descricao) {
 
 		this.titulo=titulo;
 		this.dataEvento = LocalDate.parse(data);
 		this.horario=LocalTime.parse(horario);
 		this.endereco=endereco;		
-		this.contato.add(contato);
 		this.descricao=descricao;	
 		
 	}
-
-	public Compromisso(String titulo, String data, String horario, String endereco, Contato contato) {
-		
-		this.titulo=titulo;
-		this.dataEvento = LocalDate.parse(data);
-		this.horario=LocalTime.parse(horario);
-		this.endereco=endereco;		
-		this.contato.add(contato);
-		
-	}
+	
 	
 	public Compromisso(String titulo, String data, String horario, String endereco) {
 
@@ -96,22 +87,7 @@ public class Compromisso {
 
 	public void setReferencia(String referencia) {
 		this.referencia = referencia;
-	}
-
-	public List<Contato> getContato() {
-		return contato;
-	}
-
-	public void setContato(Contato contato) {
-		
-		if(!this.contato.contains(contato)) {
-			
-		this.contato.add(contato);
-		
-		}else {
-			System.out.println("Contato já cadastrado!!");
-		}
-	}
+	}	
 
 	public String getDescricao() {
 		return descricao;
@@ -121,11 +97,18 @@ public class Compromisso {
 		this.descricao = descricao;
 	}
 	
+		
 	public long diasParaEvento() {
 		
 	return ChronoUnit.DAYS.between(LocalDate.now(), dataEvento);
 	
 	
+	}
+
+	@Override
+	public String toString() {
+		return "Compromisso [titulo=" + titulo + ", dataEvento=" + dataEvento + ", horario=" + horario
+				+ ", endereco=" + endereco + ", referencia=" + referencia + ", descricao=" + descricao + "]";
 	}
 	
 	

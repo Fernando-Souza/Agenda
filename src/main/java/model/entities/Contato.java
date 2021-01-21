@@ -7,23 +7,33 @@ public class Contato implements Comparable<Contato> {
 
 	private String nome;
 	private String cargo;
+	private int compromissoId;
 	private List<Telefone> telefone = new ArrayList<>();
 	private List<Email> email = new ArrayList<>();
 
-	public Contato(String nome, String cargo, Telefone telefone, Email email) {
+	public Contato(String nome, String cargo, Telefone telefone, Email email,int compromisso){
 
 		this.nome = nome;
 		this.cargo = cargo;
 		this.telefone.add(telefone);
 		this.email.add(email);
+		this.compromissoId = compromisso;
 
 	}
 	
-	public Contato(String nome, String cargo, Telefone telefone) {
+	public Contato(String nome, String cargo, Telefone telefone,int compromisso) {
 
 		this.nome = nome;
 		this.cargo = cargo;
 		this.telefone.add(telefone);
+		this.compromissoId=compromisso;
+	}
+	
+	public Contato(String nome,Telefone telefone,int compromisso) {
+
+		this.nome = nome;		
+		this.telefone.add(telefone);
+		this.compromissoId=compromisso;
 	}
 
 
@@ -31,7 +41,7 @@ public class Contato implements Comparable<Contato> {
 		return nome;
 	}
 
-	public void setNome(String nome) {
+	public void addNome(String nome) {
 		this.nome = nome;
 	}
 
@@ -39,7 +49,7 @@ public class Contato implements Comparable<Contato> {
 		return cargo;
 	}
 
-	public void setCargo(String cargo) {
+	public void addCargo(String cargo) {
 		this.cargo = cargo;
 	}
 
@@ -47,7 +57,7 @@ public class Contato implements Comparable<Contato> {
 		return telefone;
 	}
 
-	public void setTelefone(Telefone telefone) {
+	public void addTelefone(Telefone telefone) {
 		
 		this.telefone.add(telefone);
 	}
@@ -56,8 +66,20 @@ public class Contato implements Comparable<Contato> {
 		return email;
 	}
 
-	public void setEmail(List<Email> email) {
-		this.email = email;
+	public void addEmail(Email email) {
+		
+		this.email.add(email);
+	}
+	
+	public int getCompromisso() {
+		
+		return this.compromissoId;
+		
+	}
+	
+	public void setCompromisso(int id) {
+		
+		this.compromissoId = id;
 	}
 
 	

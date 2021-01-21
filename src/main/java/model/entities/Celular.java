@@ -2,16 +2,18 @@ package model.entities;
 
 public class Celular extends Telefone {
 
-	
-	public Celular(String operadora,String tipo, String codArea,String numero) {
-		super(operadora,tipo, codArea);
+		
+	public Celular(String operadora,String codArea,String numero) {
+		super(operadora, codArea);
 		setNumber(numero);
+		super.setTipo(TipoTel.CELULAR);
 	}
 	
-	public Celular(String tipo,String codArea, String numero) {
+	public Celular(String codArea, String numero) {
 
-		super(tipo,codArea);
+		super(codArea);
 		this.setNumber(numero);
+		super.setTipo(TipoTel.CELULAR);
 
 	}
 
