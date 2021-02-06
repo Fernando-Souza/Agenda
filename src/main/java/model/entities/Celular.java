@@ -3,18 +3,10 @@ package model.entities;
 public class Celular extends Telefone {
 
 		
-	public Celular(String operadora,String codArea,String numero) {
-		super(operadora, codArea);
+	public Celular(String codArea,String numero) {
+		super(codArea);
 		setNumber(numero);
 		super.setTipo(TipoTel.CELULAR);
-	}
-	
-	public Celular(String codArea, String numero) {
-
-		super(codArea);
-		this.setNumber(numero);
-		super.setTipo(TipoTel.CELULAR);
-
 	}
 
 	

@@ -24,14 +24,19 @@ public class Agenda extends Application {
 	    
 	    //System.out.println(meusComp);
 	    
-	    /**Contato novoContato2 = new Contato("Pedro Franco Marques","Logistica",new Celular("Oi","35","988653344"),
-	    		new Email("pedromarques@gmail.com"));**/
+	    Compromisso velhoCompromisso = new Compromisso("Festa na casa do João","2021-02-21","20:30:00","Rua das andorinhas, 300","Perto do Epa Pampulha","Levar bebida");
+	    Compromisso novoCompromisso = new Compromisso("Festa na casa do João","2021-02-23","20:30:00","Rua das andorinhas, 300","Perto do Epa Pampulha","Levar bebida");
+
 	    
-	    List<Compromisso >compromissos =cd.findAll();
+	    //cd.insert(velhoCompromisso);
+	    
+	    cd.updateDiaHora(novoCompromisso, velhoCompromisso);
+	    
+	    List<Compromisso> compromissos =cd.findAll();
 	    
 	    //cd.update(novoContato2);
 	    
-	    //Compromisso novoCompromisso = new Compromisso("Festa da empresa","2021-01-25","09:30","Rua do treino 100","Perto de algum lugar","curso de treinamento");
+	    //Compromisso novoCompromisso = new Compromisso("Festa da empresa","2021-01-25","09:30:00","Rua do treino 100","Perto de algum lugar","curso de treinamento");
 	    
 	    //cd.delete(novoCompromisso);
 	    
@@ -41,6 +46,7 @@ public class Agenda extends Application {
 		
 	    }
 	    
+	    System.out.println(cd.findByDateTime(novoCompromisso.getData().toString(),novoCompromisso.getHorario().toString()));
 		System.out.println("Deu certo!!!");
 	
 		//Email email= new Email("nandodesouza@gmail.com");

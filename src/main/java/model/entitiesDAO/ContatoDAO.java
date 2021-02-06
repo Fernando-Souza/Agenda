@@ -14,7 +14,7 @@ import model.entities.Email;
 import model.entities.Fixo;
 import model.entities.Telefone;
 
-public class ContatoDAO implements Dao<Contato> {
+public class ContatoDAO  {
 
 	Connection conn;
 
@@ -23,8 +23,7 @@ public class ContatoDAO implements Dao<Contato> {
 		this.conn = conn;
 
 	}
-
-	@Override
+	
 	public boolean insert(Contato contato) {
 
 		PreparedStatement ps = null;
@@ -37,10 +36,10 @@ public class ContatoDAO implements Dao<Contato> {
 
 			ps.setString(1, contato.getNome());
 			ps.setString(2, contato.getCargo());
-			ps.setString(3, contato.getTelefone().get(0).getCodArea());
-			ps.setString(4, contato.getTelefone().get(0).getNumero());			
+			ps.setString(3, contato.getTelefone().getCodArea());
+			ps.setString(4, contato.getTelefone().getNumero());			
 			
-			switch (contato.getTelefone().get(0).getTipo()) {
+			switch (contato.getTelefone().getTipo()) {
 
 			case CELULAR:
 				ps.setInt(5, 2);
@@ -70,7 +69,7 @@ public class ContatoDAO implements Dao<Contato> {
 
 	}
 
-	@Override
+
 	public boolean update(Contato obj) {
 		
 		PreparedStatement ps = null;
@@ -82,10 +81,10 @@ public class ContatoDAO implements Dao<Contato> {
 
 			ps.setString(1, obj.getNome());
 			ps.setString(2, obj.getCargo());
-			ps.setInt(3,obj.getTelefone().get(0).getTipo().getID());
+			ps.setInt(3,obj.getTelefone().getTipo().getID());
 			ps.setInt(4, obj.getCompromisso());
-			ps.setString(5, obj.getTelefone().get(0).getCodArea());
-			ps.setString(6, obj.getTelefone().get(0).getNumero());
+			ps.setString(5, obj.getTelefone().getCodArea());
+			ps.setString(6, obj.getTelefone().getNumero());
 
 			
 			ps.executeUpdate();
@@ -103,7 +102,7 @@ public class ContatoDAO implements Dao<Contato> {
 		return true;
 	}
 
-	@Override
+
 	public List<Contato> findAll() {
 
 		List<Contato> contatoList = new ArrayList<>();
@@ -126,18 +125,18 @@ public class ContatoDAO implements Dao<Contato> {
 				String telefoneP = rsAll.getString("TELEFONE");
 				int tipoTel = rsAll.getInt("TIPOTELEFONE");
 				int compromissoId = rsAll.getInt("COMPROMISSOID");
-				String email = rsAll.getString("EMAIL");
+				
 
 				switch (tipoTel) {
 
 				case 2:
 
-					contato = new Contato(nome, cargo, new Celular(codAreaP, telefoneP), new Email(email),compromissoId);
+					contato = new Contato(nome, cargo, new Celular(codAreaP, telefoneP),compromissoId);
 
 					break;
 				case 1:
 
-					contato = new Contato(nome, cargo, new Fixo(codAreaP, telefoneP), new Email(email),compromissoId);
+					contato = new Contato(nome, cargo, new Fixo(codAreaP, telefoneP),compromissoId);
 					break;
 				}
 
@@ -189,11 +188,11 @@ public class ContatoDAO implements Dao<Contato> {
 
 				case 2:
 
-					contato = new Contato(nome, cargo, new Celular(codArea, telefone), new Email(email),compromissoId);
+					contato = new Contato(nome, cargo, new Celular(codArea, telefone),compromissoId);
 					break;
 				case 1:
 
-					contato = new Contato(nome, cargo, new Fixo(codArea, telefone), new Email(email),compromissoId);
+					contato = new Contato(nome, cargo, new Fixo(codArea, telefone),compromissoId);
 					break;
 				}
 
@@ -254,11 +253,11 @@ public class ContatoDAO implements Dao<Contato> {
 
 				case 2:
 
-					contato = new Contato(nome, cargo, new Celular(codArea, Telefone), new Email(email),compromissoId);
+					contato = new Contato(nome, cargo, new Celular(codArea, Telefone),compromissoId);
 					break;
 				case 1:
 
-					contato = new Contato(nome, cargo, new Fixo(codArea, Telefone), new Email(email),compromissoId);
+					contato = new Contato(nome, cargo, new Fixo(codArea, Telefone),compromissoId);
 					break;
 				}
 
@@ -286,7 +285,7 @@ public class ContatoDAO implements Dao<Contato> {
 
 	}
 
-	@Override
+
 	public boolean delete(Contato obj) {
 		// TODO Auto-generated method stub
 		return false;

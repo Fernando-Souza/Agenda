@@ -2,14 +2,6 @@ package model.entities;
 
 public class Fixo extends Telefone {
 
-	public Fixo(String operadora, String codArea, String numero) {
-
-		super(operadora, codArea);
-		this.setNumber(numero);
-		super.setTipo(TipoTel.FIXO);
-
-	}
-
 	public Fixo(String codArea, String numero) {
 
 		super(codArea);
@@ -17,6 +9,7 @@ public class Fixo extends Telefone {
 		super.setTipo(TipoTel.FIXO);
 
 	}
+	
 
 	@Override
 	public void setNumber(String numero) {

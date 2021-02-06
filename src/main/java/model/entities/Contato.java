@@ -8,31 +8,22 @@ public class Contato implements Comparable<Contato> {
 	private String nome;
 	private String cargo;
 	private int compromissoId;
-	private List<Telefone> telefone = new ArrayList<>();
-	private List<Email> email = new ArrayList<>();
-
-	public Contato(String nome, String cargo, Telefone telefone, Email email,int compromisso){
+	private Telefone telefone;
+	
+	public Contato(String nome, String cargo, Telefone telefone,int compromisso){
 
 		this.nome = nome;
 		this.cargo = cargo;
-		this.telefone.add(telefone);
-		this.email.add(email);
+		this.telefone = telefone;
 		this.compromissoId = compromisso;
 
 	}
 	
-	public Contato(String nome, String cargo, Telefone telefone,int compromisso) {
-
-		this.nome = nome;
-		this.cargo = cargo;
-		this.telefone.add(telefone);
-		this.compromissoId=compromisso;
-	}
-	
+		
 	public Contato(String nome,Telefone telefone,int compromisso) {
 
 		this.nome = nome;		
-		this.telefone.add(telefone);
+		this.telefone = telefone;
 		this.compromissoId=compromisso;
 	}
 
@@ -53,24 +44,16 @@ public class Contato implements Comparable<Contato> {
 		this.cargo = cargo;
 	}
 
-	public List<Telefone> getTelefone() {
-		return telefone;
+	public Telefone getTelefone() {
+		return this.telefone;
 	}
 
-	public void addTelefone(Telefone telefone) {
+	public void setTelefone(Telefone telefone) {
 		
-		this.telefone.add(telefone);
+		this.telefone= telefone;
 	}
 
-	public List<Email> getEmail() {
-		return email;
-	}
-
-	public void addEmail(Email email) {
 		
-		this.email.add(email);
-	}
-	
 	public int getCompromisso() {
 		
 		return this.compromissoId;
@@ -86,14 +69,14 @@ public class Contato implements Comparable<Contato> {
 
 	@Override
 	public String toString() {
-		return "Contato [nome=" + nome + ", cargo=" + cargo + ", telefone=" 
-	+ telefone.get(0).toString() + ", email=" + email.get(0) + "]";
+		return "Contato [nome=" + nome + ", cargo=" + cargo + ", Cod Area = ( " 
+	+ telefone.getCodArea()+" )"+ ", telefone=" + telefone.getNumero()+"]";
 	}
  
 	@Override
 	public int compareTo(Contato other) {
 		
-		if(this.telefone.contains(other.telefone)) {
+		if(this.telefone.equals(other.telefone)) {
 			
 			return 0;
 		}

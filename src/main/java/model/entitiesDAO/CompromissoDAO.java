@@ -15,11 +15,11 @@ import java.util.List;
 
 import model.entities.Compromisso;
 
-public class CompromissoDAO implements Dao<Compromisso> {
+public class CompromissoDAO {
 
 	Connection conn;
 	DateTimeFormatter formatDia = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	DateTimeFormatter formatHora = DateTimeFormatter.ofPattern("HH:mm");
+	DateTimeFormatter formatHora = DateTimeFormatter.ofPattern("HH:mm:ss");
 
 	public CompromissoDAO(Connection conn) {
 
@@ -27,13 +27,13 @@ public class CompromissoDAO implements Dao<Compromisso> {
 
 	}
 
-	@Override
+	
 	public boolean insert(Compromisso obj) {
 
 		PreparedStatement ps = null;
 		// PreparedStatement psTel = null;
 
-		Compromisso cp = findByDateTime(obj.getData().toString(), obj.getHorario().toString());
+		Compromisso cp = findByDateTime(obj.getData().format(formatDia).toString(), obj.getHorario().format(formatHora).toString());
 
 		if (cp == null) {
 
@@ -57,11 +57,7 @@ public class CompromissoDAO implements Dao<Compromisso> {
 
 				System.out.println(e.getMessage());
 
-			} finally {
-
-				UtilDAO.closeConnection();
-
-			}
+			} 
 
 			return true;
 
@@ -85,7 +81,7 @@ public class CompromissoDAO implements Dao<Compromisso> {
 			ps = conn.prepareStatement(query);
 
 			ps.setDate(1, Date.valueOf(LocalDate.parse(dia, formatDia)));
-			ps.setTime(2, Time.valueOf(LocalTime.parse(hora, formatHora)));
+			ps.setTime(2, Time.valueOf(LocalTime.parse(hora)));
 
 			rsComp = ps.executeQuery();
 
@@ -107,17 +103,7 @@ public class CompromissoDAO implements Dao<Compromisso> {
 		} catch (SQLException e) {
 
 			e.printStackTrace();
-		} finally {
-
-			UtilDAO.closeResultSet(rsComp);
-			try {
-				ps.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
+		} 
 
 		return compromisso;
 
@@ -125,7 +111,7 @@ public class CompromissoDAO implements Dao<Compromisso> {
 	
 	
 
-	@Override
+
 	public boolean update(Compromisso obj) {
 
 		PreparedStatement ps = null;
@@ -146,25 +132,21 @@ public class CompromissoDAO implements Dao<Compromisso> {
 
 		} catch (SQLException e) {
 
-			System.out.println(e.getMessage());
+			System.out.println(e.getMessage()+"oi");
 
-		} finally {
-
-			UtilDAO.closeConnection();
-
-		}
+		} 
 
 		return true;
 	}
 
 	public void updateDiaHora(Compromisso novo, Compromisso antigo) {
 		
-		delete(findByDateTime(antigo.getData().toString(), antigo.getHorario().toString()));
+		delete(findByDateTime(antigo.getData().toString(),antigo.getHorario().format(formatHora).toString()));
 		insert(novo);		
 		
 	}
 	
-	@Override
+
 	public List<Compromisso> findAll() {
 		
 		
@@ -203,16 +185,12 @@ public class CompromissoDAO implements Dao<Compromisso> {
 
 			System.out.println(e.getMessage());
 
-		} finally {
-
-			UtilDAO.closeConnection();
-
-		}
+		} 
 
 		return compromissos;
 	}
 
-	@Override
+	
 	public boolean delete(Compromisso obj) {
 		
 		
@@ -231,11 +209,7 @@ public class CompromissoDAO implements Dao<Compromisso> {
 
 			System.out.println(e.getMessage());
 
-		} finally {
-
-			UtilDAO.closeConnection();
-
-		}
+		} 
 
 		return true;
 	}
